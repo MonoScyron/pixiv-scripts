@@ -1,7 +1,7 @@
 // ==UserScript==
 // @name         Pixiv Artist Header NSFW Marker
 // @namespace    https://github.com/MonoScyron/PixivScripts
-// @version      1.1
+// @version      0.1
 // @description  Marks any nsfw on the top-right artist preview like how nsfw is marked in the bottom artist preview
 // @author       MonoScyron
 // @updateURL    https://raw.githubusercontent.com/MonoScyron/PixivScripts/main/artist_header_nsfw_marker.js
