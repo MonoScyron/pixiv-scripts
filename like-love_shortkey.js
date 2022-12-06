@@ -4,8 +4,8 @@
 // @version      1.1
 // @description  Links the "like" and "bookmark" button to ctrl-s (Private bookmark)
 // @author       MonoScyron
-// @updateURL    https://github.com/MonoScyron/PixivScripts/like-love_shortkey.js
-// @downloadURL  https://github.com/MonoScyron/PixivScripts/like-love_shortkey.js
+// @updateURL    https://raw.githubusercontent.com/MonoScyron/PixivScripts/main/like-love_shortkey.js
+// @downloadURL  https://raw.githubusercontent.com/MonoScyron/PixivScripts/main/like-love_shortkey.js
 // @match        https://www.pixiv.net/en/artworks/*
 // @icon         https://www.google.com/s2/favicons?sz=64&domain=pixiv.net
 // @grant        none
