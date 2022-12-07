@@ -1,7 +1,7 @@
 // ==UserScript==
 // @name         Pixiv Edit Bookmark Shortkeys
 // @namespace    https://github.com/MonoScyron/PixivScripts
-// @version      0.2
+// @version      0.3
 // @description  Adds several shortkeys to the edit bookmark page + binds ctrl-enter to save & return to artwork
 // @author       MonoScyron
 // @updateURL    https://raw.githubusercontent.com/MonoScyron/PixivScripts/main/bookmark_edit_shortkeys.js
@@ -25,26 +25,20 @@
             // TODO: Handle save bookmarks & return to artwork (instead of going to bookmarks page)
             document.querySelector("input._button-large").click();
         }
-        else if(e.key == 'ArrowLeft') {
+        else if(e.key == 'ArrowLeft' || e.key == 'ArrowRight' || e.key == 'Enter') {
             if(selectedTagLi == null) {
                 selectedTagLi = listItems.firstChild;
                 selectedTagLi.firstChild.setAttribute("style", "border: 1.5px solid white !important;");
             }
-            else {
+            else if(e.key == 'ArrowLeft') {
                 selectPrevTag();
             }
-        }
-        else if(e.key == 'ArrowRight') {
-            if(selectedTagLi == null) {
-                selectedTagLi = listItems.firstChild;
-                selectedTagLi.firstChild.setAttribute("style", "border: 1.5px solid white !important;");
-            }
-            else {
+            else if(e.key == 'ArrowRight') {
                 selectNextTag();
             }
-        }
-        else if(e.key == 'Enter') {
-            listItems.childNodes.item(selectedTagVar).firstChild.click();
+            else if(e.key == 'Enter') {
+                listItems.childNodes.item(selectedTagVar).firstChild.click();
+            }
         }
     }
 
