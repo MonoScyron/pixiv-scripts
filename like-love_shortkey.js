@@ -1,7 +1,7 @@
 // ==UserScript==
 // @name         Pixiv Like-Love Shortkey
 // @namespace    https://github.com/MonoScyron/PixivScripts
-// @version      1.1
+// @version      1.1.0
 // @description  Links the "like" and "bookmark" button to ctrl-s (Private bookmark)
 // @author       MonoScyron
 // @updateURL    https://raw.githubusercontent.com/MonoScyron/PixivScripts/main/like-love_shortkey.js

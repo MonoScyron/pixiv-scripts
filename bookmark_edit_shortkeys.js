@@ -1,7 +1,7 @@
 // ==UserScript==
 // @name         Pixiv Edit Bookmark Shortkeys
 // @namespace    https://github.com/MonoScyron/PixivScripts
-// @version      1.0
+// @version      1.0.1
 // @description  Adds several shortkeys to the edit bookmark page + binds ctrl-enter to save & return to artwork
 // @author       MonoScyron
 // @updateURL    https://raw.githubusercontent.com/MonoScyron/PixivScripts/main/bookmark_edit_shortkeys.js
@@ -28,7 +28,7 @@
             var del = setInterval(() => {
                 clearInterval(del);
                 window.location.href = "https://www.pixiv.net/en/artworks/" + workID;
-            }, 1000);
+            }, 500);
         }
         else if(e.key == 'ArrowLeft' || e.key == 'ArrowRight' || e.key == 'Enter') {
             if(selectedTagLi == null) {
