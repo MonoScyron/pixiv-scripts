@@ -1,8 +1,8 @@
 // ==UserScript==
 // @name         Pixiv Edit Bookmark Shortkeys
 // @namespace    https://github.com/MonoScyron/PixivScripts
-// @version      1.0.1
-// @description  Adds several shortkeys to the edit bookmark page + binds ctrl-enter to save & return to artwork
+// @version      1.1.0
+// @description  Adds several shortkeys to the edit bookmark page, binds ctrl-enter to save & return to artwork, and binds esc to remove bookmark and return to artwork.
 // @author       MonoScyron
 // @updateURL    https://raw.githubusercontent.com/MonoScyron/PixivScripts/main/bookmark_edit_shortkeys.js
 // @downloadURL  https://raw.githubusercontent.com/MonoScyron/PixivScripts/main/bookmark_edit_shortkeys.js
@@ -21,14 +21,14 @@
     var selectedTagVar = 0;
 
     onkeydown = function(e) {
+        let workID = window.location.href.split("&").pop().split("=").pop();
         if(e.ctrlKey && e.key == 'Enter') {
-            let workID = window.location.href.split("&").pop().split("=").pop();
             document.querySelector("input._button-large").click();
-
-            var del = setInterval(() => {
-                clearInterval(del);
-                window.location.href = "https://www.pixiv.net/en/artworks/" + workID;
-            }, 500);
+            returnToWork(workID);
+        }
+        else if(e.key == 'Escape') {
+            document.querySelector("input.remove").click();
+            returnToWork(workID);
         }
         else if(e.key == 'ArrowLeft' || e.key == 'ArrowRight' || e.key == 'Enter') {
             if(selectedTagLi == null) {
@@ -45,6 +45,13 @@
                 listItems.childNodes.item(selectedTagVar).firstChild.click();
             }
         }
+    }
+
+    function returnToWork(workID) {
+        var del = setInterval(() => {
+            clearInterval(del);
+            window.location.href = "https://www.pixiv.net/en/artworks/" + workID;
+        }, 500);
     }
 
     function selectNextTag() {
