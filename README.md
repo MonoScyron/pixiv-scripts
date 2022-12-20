@@ -15,3 +15,6 @@ Adds shortkeys to the edit bookmark page.
 Adds shortkeys to use while browsing works.
 - Links the "like" and "bookmark" button to alt-ctrl-s (Private bookmark), automatically redirects to edit the bookmark
 - Links "like" only to ctrl-s
+
+## Show Alt on Hover
+Adds the alt of works as a tooltip to their previews.

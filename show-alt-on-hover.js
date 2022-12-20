@@ -2,7 +2,7 @@
 // @name         Pixiv Show Alt on Hover
 // @namespace    https://github.com/MonoScyron/PixivScripts
 // @version      0.0.1-a
-// @description  Adds tooltips to show the alts of works.
+// @description  Adds the alt of works as a tooltip to their previews.
 // @author       MonoScyron
 // @updateURL    https://raw.githubusercontent.com/MonoScyron/PixivScripts/main/show-alt-on-hover.js
 // @downloadURL  https://raw.githubusercontent.com/MonoScyron/PixivScripts/main/show-alt-on-hover.js
