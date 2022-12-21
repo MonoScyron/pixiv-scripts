@@ -79,7 +79,7 @@ const tooltipStyleCSS = `
     // TODO: Make this less scuffed via mutation listeners maybe???
     var headerInt = setInterval(() => {
         var headerWorks = document.querySelectorAll("div.sc-x0j4pn-1.kJvGKk");
-        if(headerWorks != null && headerWorks.length > 0 && headerWorks.item(0).firstChild != null) {
+        if(headerWorks != null && headerWorks.length == 3 && headerWorks.item(0).lastChild != null) {
             clearInterval(headerInt);
 
             console.log("Adding alt text to header...");
