@@ -83,6 +83,7 @@ const tooltipStyleCSS = `
             clearInterval(headerInt);
 
             console.log("Adding alt text to header...");
+            console.log(headerWorks); // TODO: Remove this
             headerWorks.forEach((e) => {
                 addTooltipUnder(e);
             });
@@ -102,8 +103,6 @@ const tooltipStyleCSS = `
      * @param {HTMLDivElement} workPreview Preview of artwork in footer
      */
     function addTooltipOverlay(workPreview) {
-        console.log(workPreview); // TODO: Remove this
-
         const img = getImageChild(workPreview);
         if(img == null)
             return;
@@ -124,8 +123,6 @@ const tooltipStyleCSS = `
      * @param {HTMLDivElement} workPreview Preview of artwork in footer
      */
     function addTooltipAbove(workPreview) {
-        console.log(workPreview); // TODO: Remove this
-
         const img = getImageChild(workPreview);
         if(img == null)
             return;
@@ -146,8 +143,6 @@ const tooltipStyleCSS = `
      * @param {HTMLDivElement} workPreview Preview of artwork in header
      */
     function addTooltipUnder(workPreview) {
-        console.log(workPreview); // TODO: Remove this
-
         const img = getImageChild(workPreview);
         if(img == null)
             return;

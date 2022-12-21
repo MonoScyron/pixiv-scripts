@@ -18,3 +18,6 @@ Adds shortkeys to use while browsing works.
 
 ## Show Alt on Hover
 Adds the alt of works as a tooltip to their previews.
+
+## Up Arrow Exit Read
+Binds up arrow to exit "reading works" when at page 1 of "reading works".
