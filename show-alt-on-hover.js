@@ -1,7 +1,7 @@
 // ==UserScript==
 // @name         Pixiv Show Alt on Hover
 // @namespace    https://github.com/MonoScyron/PixivScripts
-// @version      0.0.3-a
+// @version      0.1.0-a
 // @description  Adds the alt of works as a tooltip to their previews.
 // @author       MonoScyron
 // @updateURL    https://raw.githubusercontent.com/MonoScyron/PixivScripts/main/show-alt-on-hover.js
@@ -32,7 +32,7 @@ const tooltipStyleCSS = `
 .tooltiptext {
     display: inline-block;
     visibility: hidden;
-    width: 130px;
+    width: 150%;
     background-color: #555;
     color: #fff;
     text-align: center;
@@ -40,7 +40,7 @@ const tooltipStyleCSS = `
     border-radius: 6px;
     z-index: 1;
 
-    /* Position the tooltip text */
+    /* Position tooltip */
     position: absolute;
     left: -25%;
 
@@ -73,30 +73,47 @@ const tooltipStyleCSS = `
     tooltipStyle.innerHTML = tooltipStyleCSS;
     document.head.appendChild(tooltipStyle);
 
-    // ! No need to add alt of novels (Thankfully pixiv doesn't mix the two)
+    var root = document.querySelector("div#root");
+    if(root != null) {
+        const config = { attributes: false, childList: true, subtree: true };
+        const observer = new MutationObserver(callback);
+        observer.observe(root, config);
+    }
 
-    // On header load, scrape alt of header works and add them as tooltips to the work previews
-    // TODO: Make this less scuffed via mutation listeners maybe???
-    var headerInt = setInterval(() => {
-        var headerWorks = document.querySelectorAll("div.sc-x0j4pn-1.kJvGKk");
-        if(headerWorks != null && headerWorks.length == 3 && headerWorks.item(0).lastChild != null) {
-            clearInterval(headerInt);
+    /**
+     * Callback function to execute when mutations are observerd.
+     * @param {Array<MutationRecord>} mList 
+     * @param {MutationObserver} observer 
+    */
+    function callback(mList, observer) {
+        for(const m of mList) {
+            if(m.type == "childList") {
+                // ! No need to add alt of novels (Thankfully pixiv doesn't mix the two)
 
-            console.log("Adding alt text to header...");
-            console.log(headerWorks); // TODO: Remove this
-            headerWorks.forEach((e) => {
-                addTooltipUnder(e);
-            });
+                var target = m.target;
+
+                // On header load, scrape alt of header works and add them as tooltips to the work previews
+                if(target.nodeName == "ASIDE" && target.classList.contains("sc-1nr368f-7") && target.classList.contains("hdvpLU")) {
+                    console.log("Script: Adding alts to header...");
+                    target.querySelector("nav.sc-x0j4pn-0.gbvtwZ").childNodes.forEach((n) => {
+                        addTooltipUnder(n);
+                    });
+                }
+
+                // On footer load, scrape alt of footer works and add them as tooltips to the work previews
+                // TODO: Stop footer nav container from automatically expanding when adding alt tooltips
+                if(target.nodeName == "DIV" && target.classList.contains("sc-rp5asc-9") && target.classList.contains("cYUezH")) {
+                    console.log("Script: Adding alts to a footer work...");
+                    // * This doesn't work yet!
+                    // addTooltipUnder(target.parentNode.parentNode.parentNode.parentNode.parentNode.parentNode);
+                }
+
+                // TODO: Scrape alt of /tags/* (works search) page and add them as tooltips to the work previews
+                // TODO: Scrape alt of /users/* (users) page and add them as tooltips to the work previews
+                // TODO: Scrape alt of /*/ (home) page and add them as tooltips to the work previews
+            }
         }
-    }, 100);
-
-    // TODO: On footer load, scrape alt of footer works and add them as tooltips to the work previews
-
-    // TODO: Scrape alt of /tags/* page and add them as tooltips to the work previews
-
-    // TODO: Scrape alt of /users/* page and add them as tooltips to the work previews
-
-    // TODO: Scrape alt of /*/ page and add them as tooltips to the work previews
+    }
 
     /**
      * Takes a work preview and overlays its alt attribute as a tooltip over the preview.
@@ -143,6 +160,9 @@ const tooltipStyleCSS = `
      * @param {HTMLDivElement} workPreview Preview of artwork in header
      */
     function addTooltipUnder(workPreview) {
+        if(workPreview.childNodes.length >= 2)
+            return;
+
         const img = getImageChild(workPreview);
         if(img == null)
             return;
