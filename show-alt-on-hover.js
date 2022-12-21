@@ -1,7 +1,7 @@
 // ==UserScript==
 // @name         Pixiv Show Alt on Hover
 // @namespace    https://github.com/MonoScyron/PixivScripts
-// @version      0.0.2-a
+// @version      0.0.3-a
 // @description  Adds the alt of works as a tooltip to their previews.
 // @author       MonoScyron
 // @updateURL    https://raw.githubusercontent.com/MonoScyron/PixivScripts/main/show-alt-on-hover.js
@@ -14,10 +14,22 @@
 // @grant        none
 // ==/UserScript==
 
-
 const tooltipStyleCSS = `
-/* Header tooltip text */
-.tooltip-header .tooltiptext-header {
+/* Position tooltip text */
+.tooltiptext-over {
+    bottom: 110%;
+}
+
+.tooltiptext-under {
+    top: 110%;
+}
+
+.tooltiptext-overlay {
+    top: 15%;
+}
+
+/* General formatting for tooltip text */
+.tooltiptext {
     display: inline-block;
     visibility: hidden;
     width: 130px;
@@ -26,20 +38,24 @@ const tooltipStyleCSS = `
     text-align: center;
     padding: 3px;
     border-radius: 6px;
+    z-index: 1;
 
     /* Position the tooltip text */
-    position: relative;
-    bottom: -5%;
-    left: 50%;
-    margin-left: -65px;
+    position: absolute;
+    left: -25%;
 
     /* Fade in tooltip */
     opacity: 0;
     transition: opacity 0.1s;
 }
 
+/* General formatting for tooltip */
+.tooltip {
+    position: relative;
+}
+
 /* Show the tooltip text when you mouse over the tooltip container */
-.tooltip-header:hover .tooltiptext-header {
+.tooltip:hover .tooltiptext {
     visibility: visible;
     opacity: 1;
 }
@@ -63,13 +79,12 @@ const tooltipStyleCSS = `
     // TODO: Make this less scuffed via mutation listeners maybe???
     var headerInt = setInterval(() => {
         var headerWorks = document.querySelectorAll("div.sc-x0j4pn-1.kJvGKk");
-        if(headerWorks != null && headerWorks.length > 0) {
+        if(headerWorks != null && headerWorks.length > 0 && headerWorks.item(0).firstChild != null) {
             clearInterval(headerInt);
 
             console.log("Adding alt text to header...");
             headerWorks.forEach((e) => {
-                console.log(e);
-                addHeaderTooltip(e);
+                addTooltipUnder(e);
             });
         }
     }, 100);
@@ -83,10 +98,12 @@ const tooltipStyleCSS = `
     // TODO: Scrape alt of /*/ page and add them as tooltips to the work previews
 
     /**
-     * Takes a work preview in the header and adds its alt attribute as a tooltip under it.
-     * @param {HTMLDivElement} workPreview Preview of the artwork
+     * Takes a work preview and overlays its alt attribute as a tooltip over the preview.
+     * @param {HTMLDivElement} workPreview Preview of artwork in footer
      */
-    function addHeaderTooltip(workPreview) {
+    function addTooltipOverlay(workPreview) {
+        console.log(workPreview); // TODO: Remove this
+
         const img = getImageChild(workPreview);
         if(img == null)
             return;
@@ -94,10 +111,54 @@ const tooltipStyleCSS = `
         const alt = img.getAttribute("alt");
         if(alt != null) {
             const tooltip = document.createElement('span');
-            tooltip.className = 'tooltiptext-header';
+            tooltip.className = "tooltiptext tooltiptext-overlay";
             tooltip.innerHTML = alt;
 
-            workPreview.classList.add('tooltip-header');
+            workPreview.classList.add("tooltip");
+            workPreview.appendChild(tooltip);
+        }
+    }
+
+    /**
+     * Takes a work preview and adds its alt attribute as a tooltip above it.
+     * @param {HTMLDivElement} workPreview Preview of artwork in footer
+     */
+    function addTooltipAbove(workPreview) {
+        console.log(workPreview); // TODO: Remove this
+
+        const img = getImageChild(workPreview);
+        if(img == null)
+            return;
+
+        const alt = img.getAttribute("alt");
+        if(alt != null) {
+            const tooltip = document.createElement('span');
+            tooltip.className = "tooltiptext tooltiptext-over";
+            tooltip.innerHTML = alt;
+
+            workPreview.classList.add("tooltip");
+            workPreview.appendChild(tooltip);
+        }
+    }
+
+    /**
+     * Takes a work preview and adds its alt attribute as a tooltip under it.
+     * @param {HTMLDivElement} workPreview Preview of artwork in header
+     */
+    function addTooltipUnder(workPreview) {
+        console.log(workPreview); // TODO: Remove this
+
+        const img = getImageChild(workPreview);
+        if(img == null)
+            return;
+
+        const alt = img.getAttribute("alt");
+        if(alt != null) {
+            const tooltip = document.createElement('span');
+            tooltip.className = "tooltiptext tooltiptext-under";
+            tooltip.innerHTML = alt;
+
+            workPreview.classList.add("tooltip");
             workPreview.appendChild(tooltip);
         }
     }
@@ -109,7 +170,7 @@ const tooltipStyleCSS = `
      */
     function getImageChild(element) {
         var ret = element;
-        while(ret.nodeName != 'IMG') {
+        while(ret != null && ret.nodeName != 'IMG') {
             ret = ret.firstChild;
         }
         return ret;
