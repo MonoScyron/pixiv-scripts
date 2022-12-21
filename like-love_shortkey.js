@@ -6,7 +6,7 @@
 // @author       MonoScyron
 // @updateURL    https://raw.githubusercontent.com/MonoScyron/PixivScripts/main/like-love_shortkey.js
 // @downloadURL  https://raw.githubusercontent.com/MonoScyron/PixivScripts/main/like-love_shortkey.js
-// @match        https://www.pixiv.net/en/artworks/*
+// @match        https://www.pixiv.net/*/artworks/*
 // @icon         https://www.google.com/s2/favicons?sz=64&domain=pixiv.net
 // @grant        none
 // ==/UserScript==
