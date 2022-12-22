@@ -1,11 +1,11 @@
 // ==UserScript==
 // @name         Pixiv Edit Bookmark Shortkeys
-// @namespace    https://github.com/MonoScyron/PixivScripts
-// @version      1.1.1
+// @namespace    https://github.com/MonoScyron/pixiv-scripts
+// @version      1.1.2
 // @description  Adds several shortkeys to the edit bookmark page, binds ctrl-enter to save & return to artwork, and binds esc to remove bookmark and return to artwork.
 // @author       MonoScyron
-// @updateURL    https://raw.githubusercontent.com/MonoScyron/PixivScripts/main/bookmark_edit_shortkeys.js
-// @downloadURL  https://raw.githubusercontent.com/MonoScyron/PixivScripts/main/bookmark_edit_shortkeys.js
+// @updateURL    https://raw.githubusercontent.com/MonoScyron/pixiv-scripts/main/bookmark_edit_shortkeys.js
+// @downloadURL  https://raw.githubusercontent.com/MonoScyron/pixiv-scripts/main/bookmark_edit_shortkeys.js
 // @match        https://www.pixiv.net/bookmark_add*
 // @icon         https://www.google.com/s2/favicons?sz=64&domain=pixiv.net
 // @grant        none
