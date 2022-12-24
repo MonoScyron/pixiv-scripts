@@ -1,11 +1,12 @@
 // ==UserScript==
 // @name         Pixiv Up Arrow Exit Read
 // @namespace    https://github.com/MonoScyron/pixiv-scripts
-// @version      1.1.2
+// @version      1.1.3
 // @description  Binds up arrow to exit "reading works" when at page 1 of "reading works".
 // @author       MonoScyron
 // @updateURL    https://raw.githubusercontent.com/MonoScyron/pixiv-scripts/main/up-arrow-exit-read.js
 // @downloadURL  https://raw.githubusercontent.com/MonoScyron/pixiv-scripts/main/up-arrow-exit-read.js
+// @match        https://www.pixiv.net/*/
 // @match        https://www.pixiv.net/*/artworks/*
 // @icon         https://www.google.com/s2/favicons?sz=64&domain=pixiv.net
 // @grant        none
