@@ -1,12 +1,13 @@
 // ==UserScript==
 // @name         Pixiv Like-Love Shortkey
 // @namespace    https://github.com/MonoScyron/pixiv-scripts
-// @version      1.2.3
+// @version      1.2.4
 // @description  Links the "like" and "bookmark" button to alt-ctrl-s (Private bookmark). Links "like" only to ctrl-s.
 // @author       MonoScyron
 // @updateURL    https://raw.githubusercontent.com/MonoScyron/pixiv-scripts/main/like-love_shortkey.js
 // @downloadURL  https://raw.githubusercontent.com/MonoScyron/pixiv-scripts/main/like-love_shortkey.js
 // @match        https://www.pixiv.net/*/
+// @match        https://www.pixiv.net/*/users/*
 // @match        https://www.pixiv.net/*/artworks/*
 // @icon         https://www.google.com/s2/favicons?sz=64&domain=pixiv.net
 // @grant        none
