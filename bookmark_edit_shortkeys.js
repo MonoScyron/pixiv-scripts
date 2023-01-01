@@ -1,8 +1,8 @@
 // ==UserScript==
 // @name         Pixiv Edit Bookmark Shortkeys
 // @namespace    https://github.com/MonoScyron/pixiv-scripts
-// @version      1.1.2
-// @description  Adds several shortkeys to the edit bookmark page, binds ctrl-enter to save & return to artwork, and binds esc to remove bookmark and return to artwork.
+// @version      1.2.0
+// @description  Causes the remove and edit bookmark buttons to redirect back to their artwork. Binds ctrl-enter to the edit bookmark button and esc to the remove bookmark button. Also allows navigation of the tag list via arrow and enter.
 // @author       MonoScyron
 // @updateURL    https://raw.githubusercontent.com/MonoScyron/pixiv-scripts/main/bookmark_edit_shortkeys.js
 // @downloadURL  https://raw.githubusercontent.com/MonoScyron/pixiv-scripts/main/bookmark_edit_shortkeys.js
@@ -19,18 +19,21 @@
     }
 
     const listItems = document.querySelector("ul.list-items.tag-cloud:not(ul.work)");
+    const editBtn = document.querySelector("input._button-large");
+    const removeBtn = document.querySelector("input.remove");
+
+    editBtn.onclick = returnToWork;
+    removeBtn.onclick = returnToWork;
+
     var selectedTagLi = null;
-    var selectedTagVar = 0;
+    var selectedTagVar = 0
 
     onkeydown = function(e) {
-        let workID = window.location.href.split("&").pop().split("=").pop();
         if(e.ctrlKey && e.key == 'Enter') {
-            document.querySelector("input._button-large").click();
-            returnToWork(workID);
+            editBtn.click();
         }
         else if(e.key == 'Escape') {
-            document.querySelector("input.remove").click();
-            returnToWork(workID);
+            removeBtn.click();
         }
         else if(e.key == 'ArrowLeft' || e.key == 'ArrowRight' || e.key == 'Enter') {
             if(selectedTagLi == null) {
@@ -49,9 +52,9 @@
         }
     }
 
-    function returnToWork(workID) {
-        var del = setInterval(() => {
-            clearInterval(del);
+    function returnToWork() {
+        let workID = window.location.href.split("&").pop().split("=").pop();
+        setTimeout(() => {
             window.location.href = "https://www.pixiv.net/en/artworks/" + workID;
         }, 500);
     }
