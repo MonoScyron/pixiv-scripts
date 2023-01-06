@@ -1,7 +1,7 @@
 // ==UserScript==
 // @name         Pixiv Edit Bookmark Shortkeys
 // @namespace    https://github.com/MonoScyron/pixiv-scripts
-// @version      1.2.0
+// @version      1.2.1
 // @description  Causes the remove and edit bookmark buttons to redirect back to their artwork. Binds ctrl-enter to the edit bookmark button and esc to the remove bookmark button. Also allows navigation of the tag list via arrow and enter.
 // @author       MonoScyron
 // @updateURL    https://raw.githubusercontent.com/MonoScyron/pixiv-scripts/main/bookmark_edit_shortkeys.js
@@ -9,6 +9,7 @@
 // @match        https://www.pixiv.net/bookmark_add*
 // @icon         https://www.google.com/s2/favicons?sz=64&domain=pixiv.net
 // @grant        none
+// @noframes
 // ==/UserScript==
 
 (function() {

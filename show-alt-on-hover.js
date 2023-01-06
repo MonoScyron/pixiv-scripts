@@ -1,7 +1,7 @@
 // ==UserScript==
 // @name         Pixiv Show Alt on Hover (WIP)
 // @namespace    https://github.com/MonoScyron/pixiv-scripts
-// @version      0.1.3
+// @version      0.1.4
 // @description  Adds the alt of works as a tooltip to their previews.
 // @author       MonoScyron
 // @updateURL    https://raw.githubusercontent.com/MonoScyron/pixiv-scripts/main/show-alt-on-hover.js
@@ -12,6 +12,7 @@
 // @match        https://www.pixiv.net/*/
 // @icon         https://www.google.com/s2/favicons?sz=64&domain=pixiv.net
 // @grant        none
+// @noframes
 // ==/UserScript==
 
 const tooltipStyleCSS = `
