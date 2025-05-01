@@ -1,8 +1,8 @@
 // ==UserScript==
 // @name         Pixiv Like-Love Shortkey
 // @namespace    https://github.com/MonoScyron/pixiv-scripts
-// @version      1.2.5
-// @description  Links the "like" and "bookmark" button to alt-ctrl-s (Private bookmark). Links "like" only to ctrl-s.
+// @version      1.3.0
+// @description  Links the "like" and "bookmark" button to alt-ctrl-s, also enters bookmark edit. Links "like" only to ctrl-s.
 // @author       MonoScyron
 // @updateURL    https://raw.githubusercontent.com/MonoScyron/pixiv-scripts/main/like-love_shortkey.js
 // @downloadURL  https://raw.githubusercontent.com/MonoScyron/pixiv-scripts/main/like-love_shortkey.js
@@ -29,29 +29,15 @@
 
             var loveBtn = document.querySelector("button.gtm-main-bookmark");
             if(loveBtn != null && loveBtn.getAttribute("disabled") == null) {
-                console.log("Accessing menu...");
+                console.log("Bookmarking...");
+                loveBtn.click();
 
-                document.querySelector("button.l6avS_e._1W1yk-M").click();
-
-                var del1 = setInterval(() => {
-                    var loveBtnMenu = document.querySelector("li.sc-1o8nozx-2.bmbKoQ");
-                    if(loveBtnMenu != null && loveBtnMenu.getAttribute("disabled") != "") {
-                        console.log("Bookmarking work...");
-
-                        clearInterval(del1);
-                        loveBtnMenu.click();
-
-                        var del2 = setInterval(() => {
-                            var editBtn = document.querySelector("a.sc-d98f2c-0.sc-1ij5ui8-1.RICfj");
-                            if(editBtn != null) {
-                                console.log("Editing bookmark...");
-
-                                clearInterval(del2);
-                                editBtn.click();
-                            }
-                        }, 10);
-                    }
-                }, 10);
+                console.log("Entering bookmark...");
+                let workID = window.location.href.split("/").pop();
+                let bookmarkLink = "/bookmark_add.php?type=illust&illust_id=" + workID;
+                setTimeout(() => {
+                    window.location.href = bookmarkLink;
+                }, 500);
             }
         }
         else if(e.ctrlKey && e.key == 's') {
@@ -61,7 +47,7 @@
     }
 
     function likeWork() {
-        var likeBtn = document.querySelector("button._35vRH4a");
+        var likeBtn = document.querySelector("button.style_button___0N4_");
         if(likeBtn != null && likeBtn.getAttribute("disabled") == null) {
             console.log("Liking work...");
             likeBtn.click();

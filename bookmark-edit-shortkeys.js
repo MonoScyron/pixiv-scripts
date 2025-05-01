@@ -1,7 +1,7 @@
 // ==UserScript==
 // @name         Pixiv Edit Bookmark Shortkeys
 // @namespace    https://github.com/MonoScyron/pixiv-scripts
-// @version      1.2.1
+// @version      1.3.0
 // @description  Causes the remove and edit bookmark buttons to redirect back to their artwork. Binds ctrl-enter to the edit bookmark button and esc to the remove bookmark button. Also allows navigation of the tag list via arrow and enter.
 // @author       MonoScyron
 // @updateURL    https://raw.githubusercontent.com/MonoScyron/pixiv-scripts/main/bookmark_edit_shortkeys.js
@@ -14,10 +14,14 @@
 
 (function() {
     'use strict';
+    const SELECTED_STYLE = "border: 1.5px solid black !important;";
 
     if(document.body != null) {
         document.body.addEventListener("keydown", onkeydown);
     }
+
+    // switch to private bookmark
+    document.querySelector('input[name="restrict"][value="1"]').checked = true;
 
     const listItems = document.querySelector("ul.list-items.tag-cloud:not(ul.work)");
     const editBtn = document.querySelector("input._button-large");
@@ -39,7 +43,7 @@
         else if(e.key == 'ArrowLeft' || e.key == 'ArrowRight' || e.key == 'Enter') {
             if(selectedTagLi == null) {
                 selectedTagLi = listItems.firstChild;
-                selectedTagLi.firstChild.setAttribute("style", "border: 1.5px solid white !important;");
+                selectedTagLi.firstChild.setAttribute("style", SELECTED_STYLE);
             }
             else if(e.key == 'ArrowLeft') {
                 selectPrevTag();
@@ -57,7 +61,7 @@
         let workID = window.location.href.split("&").pop().split("=").pop();
         setTimeout(() => {
             window.location.href = "https://www.pixiv.net/en/artworks/" + workID;
-        }, 500);
+        }, 1000);
     }
 
     function selectNextTag() {
@@ -68,7 +72,7 @@
             selectedTagVar = 0;
         }
 
-        listItems.childNodes.item(selectedTagVar).firstChild.setAttribute("style", "border: 1.5px solid white !important;");
+        listItems.childNodes.item(selectedTagVar).firstChild.setAttribute("style", SELECTED_STYLE);
     }
 
     function selectPrevTag() {
@@ -79,6 +83,6 @@
             selectedTagVar = listItems.childNodes.length - 1;
         }
 
-        listItems.childNodes.item(selectedTagVar).firstChild.setAttribute("style", "border: 1.5px solid white !important;");
+        listItems.childNodes.item(selectedTagVar).firstChild.setAttribute("style", SELECTED_STYLE);
     }
 })();
