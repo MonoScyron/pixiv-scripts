@@ -1,7 +1,7 @@
 // ==UserScript==
 // @name         Pixiv Like-Love Shortkey
 // @namespace    https://github.com/MonoScyron/pixiv-scripts
-// @version      1.3.0
+// @version      1.3.1
 // @description  Links the "like" and "bookmark" button to alt-ctrl-s, also enters bookmark edit. Links "like" only to ctrl-s.
 // @author       MonoScyron
 // @updateURL    https://raw.githubusercontent.com/MonoScyron/pixiv-scripts/main/like-love_shortkey.js
@@ -47,7 +47,7 @@
     }
 
     function likeWork() {
-        var likeBtn = document.querySelector("button.style_button___0N4_");
+        var likeBtn = document.querySelector("button[class^='style_button']");
         if(likeBtn != null && likeBtn.getAttribute("disabled") == null) {
             console.log("Liking work...");
             likeBtn.click();
